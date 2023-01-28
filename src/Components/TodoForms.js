@@ -14,10 +14,22 @@ const TodoForm = () => {
     if (todoString === "") {
       return alert("Please enter Todo");
     }
+
+    const todo = {
+      todoString,
+      id: v4(),
+    };
+
+    dispatch({
+      type: ADD_TODO,
+      payload: todo,
+    });
+
+    setTodoString("");
   };
 
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <FormGroup>
         <InputGroup>
           <Input
@@ -26,7 +38,7 @@ const TodoForm = () => {
             id="todo"
             placeholder="Your Next Todo"
             value={todoString}
-            onChange={(e) => (setTodoString = e.target.value)}
+            onChange={(e) => setTodoString(e.target.value)}
           />
           <Button color="warning" /*onClick */>Add</Button>
         </InputGroup>
